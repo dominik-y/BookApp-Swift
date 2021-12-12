@@ -23,17 +23,18 @@ struct LogInView: View {
         NavigationView{
             VStack{
                 TextField("Email", text: $email)
-                    .frame(width: 250, height: 30, alignment: .center)
+                    .frame(width: 330, height: 40, alignment: .center)
                     .overlay(
-                        RoundedRectangle(cornerRadius: 15)
+                        RoundedRectangle(cornerRadius: 7)
                             .stroke(Color.purple, lineWidth: 4)
-                    ).autocapitalization(.none)
+                    ).padding()
+                    .autocapitalization(.none)
                     .multilineTextAlignment(.center)
                 
                 SecureField("Password", text: $password)
-                    .frame(width: 250, height: 30, alignment: .center)
+                    .frame(width: 330, height: 40, alignment: .center)
                     .overlay(
-                        RoundedRectangle(cornerRadius: 15)
+                        RoundedRectangle(cornerRadius: 7)
                             .stroke(Color.purple, lineWidth: 4)
                     )
                     .multilineTextAlignment(.center)
@@ -51,7 +52,7 @@ struct LogInView: View {
                         .alert("Wrong credentials", isPresented: $loginVM.shouldAlertCredentials) {
                                     Button("OK", role: .cancel) { }
                                 }
-                        .frame(width: 100, height: 30, alignment: .center)
+                        .frame(width: 110, height: 30, alignment: .center)
                         .overlay(
                             RoundedRectangle(cornerRadius: 15)
                                 .stroke(Color.purple, lineWidth: 4)
@@ -65,7 +66,7 @@ struct LogInView: View {
                         } label: {
                             Text("Registration")
                         }
-                        .frame(width: 100, height: 30, alignment: .center)
+                        .frame(width: 110, height: 30, alignment: .center)
                         .overlay(
                             RoundedRectangle(cornerRadius: 15)
                                 .stroke(Color.purple, lineWidth: 4)

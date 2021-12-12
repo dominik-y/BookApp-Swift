@@ -44,7 +44,6 @@
 		B42225B72760D00B001F229E /* FirebaseStorageSwift-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = B42225B62760D00B001F229E /* FirebaseStorageSwift-Beta */; };
 		B44398AD2760D03D0012B61F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B44398AC2760D03D0012B61F /* GoogleService-Info.plist */; };
 		B44398AF2760DA580012B61F /* LogInVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = B44398AE2760DA580012B61F /* LogInVM.swift */; };
-		B478B14B276372A100699E81 /* RegistrationVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = B478B14A276372A100699E81 /* RegistrationVM.swift */; };
 		B478B14D2763BAEC00699E81 /* RecommendedVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = B478B14C2763BAEC00699E81 /* RecommendedVM.swift */; };
 		B478B14F2763BB4A00699E81 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = B478B14E2763BB4900699E81 /* User.swift */; };
 		B478B1512763C98300699E81 /* DetailBookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B478B1502763C98300699E81 /* DetailBookView.swift */; };
@@ -56,6 +55,7 @@
 		B4D68BE12760C4D900738A98 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B4D68BE02760C4D900738A98 /* Preview Assets.xcassets */; };
 		B4D68BEB2760C53400738A98 /* LogInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4D68BEA2760C53400738A98 /* LogInView.swift */; };
 		B4D68BEF2760C95C00738A98 /* RegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4D68BEE2760C95C00738A98 /* RegistrationView.swift */; };
+		B4EF90E927665FB8005BF5C4 /* LikeListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4EF90E827665FB8005BF5C4 /* LikeListView.swift */; };
 		B4FECB162763E7730079F373 /* CommView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4FECB152763E7730079F373 /* CommView.swift */; };
 /* End PBXBuildFile section */
 
@@ -71,7 +71,6 @@
 		B42225812760CDD8001F229E /* RecommendedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendedView.swift; sourceTree = "<group>"; };
 		B44398AC2760D03D0012B61F /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; name = "GoogleService-Info.plist"; path = "BookApp/GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		B44398AE2760DA580012B61F /* LogInVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInVM.swift; sourceTree = "<group>"; };
-		B478B14A276372A100699E81 /* RegistrationVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationVM.swift; sourceTree = "<group>"; };
 		B478B14C2763BAEC00699E81 /* RecommendedVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendedVM.swift; sourceTree = "<group>"; };
 		B478B14E2763BB4900699E81 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		B478B1502763C98300699E81 /* DetailBookView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailBookView.swift; sourceTree = "<group>"; };
@@ -83,6 +82,7 @@
 		B4D68BE02760C4D900738A98 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		B4D68BEA2760C53400738A98 /* LogInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInView.swift; sourceTree = "<group>"; };
 		B4D68BEE2760C95C00738A98 /* RegistrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationView.swift; sourceTree = "<group>"; };
+		B4EF90E827665FB8005BF5C4 /* LikeListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeListView.swift; sourceTree = "<group>"; };
 		B4FECB152763E7730079F373 /* CommView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -175,6 +175,7 @@
 				B478B1502763C98300699E81 /* DetailBookView.swift */,
 				B4CB7C022763E29B00E05EE7 /* CommentView.swift */,
 				B4FECB152763E7730079F373 /* CommView.swift */,
+				B4EF90E827665FB8005BF5C4 /* LikeListView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -184,7 +185,6 @@
 			children = (
 				B44398AE2760DA580012B61F /* LogInVM.swift */,
 				B4157AB927627ADC0076E603 /* BookVM.swift */,
-				B478B14A276372A100699E81 /* RegistrationVM.swift */,
 				B478B14C2763BAEC00699E81 /* RecommendedVM.swift */,
 				B418F5ED2763D88500D2D4E9 /* DetailBookVM.swift */,
 			);
@@ -315,10 +315,10 @@
 				B478B14F2763BB4A00699E81 /* User.swift in Sources */,
 				B42225802760CDAE001F229E /* FavoritesView.swift in Sources */,
 				B418F5EE2763D88500D2D4E9 /* DetailBookVM.swift in Sources */,
+				B4EF90E927665FB8005BF5C4 /* LikeListView.swift in Sources */,
 				B4D68BEF2760C95C00738A98 /* RegistrationView.swift in Sources */,
 				B4157AB827627AB80076E603 /* Like.swift in Sources */,
 				B4157ABA27627ADC0076E603 /* BookVM.swift in Sources */,
-				B478B14B276372A100699E81 /* RegistrationVM.swift in Sources */,
 				B42225822760CDD8001F229E /* RecommendedView.swift in Sources */,
 				B422257E2760CD0D001F229E /* BookTabView.swift in Sources */,
 				B4157AB4276103120076E603 /* Book.swift in Sources */,

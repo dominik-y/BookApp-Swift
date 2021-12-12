@@ -25,7 +25,8 @@ struct RegistrationView: View {
                 .overlay(
                     RoundedRectangle(cornerRadius: 15)
                         .stroke(Color.purple, lineWidth: 4)
-                )
+                ).padding(5)
+                .autocapitalization(.none)
                 .multilineTextAlignment(.center)
             
             SecureField("Password", text: $password)
@@ -33,7 +34,8 @@ struct RegistrationView: View {
                 .overlay(
                     RoundedRectangle(cornerRadius: 15)
                         .stroke(Color.purple, lineWidth: 4)
-                )
+                ).padding(5)
+                .autocapitalization(.none)
                 .multilineTextAlignment(.center)
             
             TextField("Name", text: $name)
@@ -41,7 +43,8 @@ struct RegistrationView: View {
                 .overlay(
                     RoundedRectangle(cornerRadius: 15)
                         .stroke(Color.purple, lineWidth: 4)
-                )
+                ).padding(5)
+                .autocapitalization(.none)
                 .multilineTextAlignment(.center)
             
             TextField("Surname", text: $surname)
@@ -49,7 +52,8 @@ struct RegistrationView: View {
                 .overlay(
                     RoundedRectangle(cornerRadius: 15)
                         .stroke(Color.purple, lineWidth: 4)
-                )
+                ).padding(5)
+                .autocapitalization(.none)
                 .multilineTextAlignment(.center)
             
             Picker("Espionage", selection: $genre) {
@@ -61,13 +65,13 @@ struct RegistrationView: View {
             .overlay(
                 RoundedRectangle(cornerRadius: 15)
                     .stroke(Color.purple, lineWidth: 4)
-            )
+            ).padding(5)
             .multilineTextAlignment(.center)
             
             HStack{
                 Button("Register") {
                     loginVM.SignUp(email: email, password: password, name: name, surname: surname, genre: genre)
-                }
+                }.padding()
                 .frame(width: 100, height: 30, alignment: .center)
                 .overlay(
                     RoundedRectangle(cornerRadius: 15)

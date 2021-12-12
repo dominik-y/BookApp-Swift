@@ -50,8 +50,6 @@ class LogInVM : ObservableObject{
         }
     
     
-    
-    
     func isEmailValid(email: String) -> Bool {
            // criteria in regex.  See http://regexlib.com
            let emailTest = NSPredicate(format: "SELF MATCHES %@",
@@ -61,8 +59,8 @@ class LogInVM : ObservableObject{
     
 //
 //    public func isValidPassword() -> Bool {
-//        let passwordRegex = "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z!@#$%^&*()\\-_=+{}|?>.<,:;~`’]{8,}$"
-//        return NSPredicate(format: "SELF MATCHES %@", passwordRegex).evaluate(with: self)
+//        let passwordTest = NSPredicate(format: "SELF MATCHES %@", "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$")
+//        return NSPredicate(format: "SELF MATCHES %@", passwordTest).evaluate(with: self)
 //    }
     
     

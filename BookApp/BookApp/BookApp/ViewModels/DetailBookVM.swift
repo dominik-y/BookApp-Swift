@@ -13,12 +13,17 @@ import FirebaseFirestore
 class DetailBookVM: ObservableObject{
     
     @Published var allComments = [Comment]()
-    @Published var bookComments = [Comment]()
+    @Published var allLikes = [Like]()
     @Published var allUsers = [User]()
+    private var isLiked = false
+    private var docID = ""
+    private var bookComments = [Comment]()
+    private var bookLikes = [Like]()
     
     
     init(){
         getAllComments()
+        getAllLikes()
         getUsers()
     }
     
@@ -58,14 +63,14 @@ class DetailBookVM: ObservableObject{
         }
     }
     
-    func getBookComment(bookName: String){
-        self.bookComments = []
-        for comment in allComments{
-            if bookName == comment.bookName{
-                bookComments.append(comment)
-            }
-        }
-    }
+    /*func getBookComment(bookName: String){
+     self.bookComments = []
+     for comment in allComments{
+     if bookName == comment.bookName{
+     bookComments.append(comment)
+     }
+     }
+     }*/
     
     func sendComment(comm: String, name: String, surname: String, bookName: String){
         Firestore.firestore().collection("Comments").addDocument(data: [
@@ -78,6 +83,83 @@ class DetailBookVM: ObservableObject{
                 print("Error adding document: \(err)")
             } else {
                 print("Yea baby")
+            }
+        }
+    }
+    
+    func getAllLikes(){
+        Firestore.firestore().collection("Likes").addSnapshotListener{ (querySnapshot, err) in
+            guard let documents = querySnapshot?.documents else{
+                return
+            }
+            self.allLikes = documents.map{ (queryDocumentSnapshot) -> Like in
+                let data = queryDocumentSnapshot.data()
+                let name = data["name"] as? String ?? ""
+                let surname = data["surname"] as? String ?? ""
+                let bookName = data["bookName"] as? String ?? ""
+                let like = Like(name: name, surname: surname, bookName: bookName)
+                return like
+            }
+        }
+    }
+    
+    func getDocumentId(name: String, surname: String, bookName: String){
+        Firestore.firestore().collection("Likes").getDocuments() { (querySnapshot, err) in
+            if let err = err {
+                print("Error getting documents: \(err)")
+            } else {
+                for document in querySnapshot!.documents {
+                    if document.data()["name"] as! String == name && document.data()["surname"] as! String == surname && document.data()["bookName"] as! String == bookName{
+                        self.docID = document.documentID
+                    }
+                }
+            }
+        }
+    }
+    
+    
+    func getBookLike(bookName: String){
+        self.bookLikes = []
+        for like in allLikes{
+            if bookName == like.bookName{
+                bookLikes.append(like)
+            }
+        }
+    }
+    
+  
+    func checkLikeStatus(name: String, surname: String, bookName: String) -> Bool{
+        for like in bookLikes{
+            if like.name == name && like.surname == surname{
+                return true
+            }
+        }
+        return false
+    }
+
+    
+    func sendLike(name: String, surname: String, bookName: String){
+        getBookLike(bookName: bookName)
+        
+        if checkLikeStatus(name: name, surname: surname, bookName: bookName) == false {
+            Firestore.firestore().collection("Likes").addDocument(data: [
+                "name": name,
+                "surname": surname,
+                "bookName": bookName
+            ]) { err in
+                if let err = err {
+                    print("Error adding document: \(err)")
+                } else {
+                    print("Yea baby")
+                }
+            }
+        }else{
+            Firestore.firestore().collection("Likes").document(docID).delete() { err in
+                if let err = err {
+                    print("Error removing document: \(err)")
+                } else {
+                    print("Document successfully removed!")
+                }
             }
         }
     }

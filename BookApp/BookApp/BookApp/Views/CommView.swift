@@ -10,7 +10,8 @@ import SwiftUI
 struct CommView: View {
     
     var book: Book
-    var detailVM: DetailBookVM
+    @ObservedObject var detailVM: DetailBookVM
+    
     @State var comment = ""
     
     var body: some View {
