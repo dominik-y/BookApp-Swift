@@ -10,13 +10,14 @@ import SDWebImageSwiftUI
 
 struct DetailBookView: View {
     
+    @ObservedObject var bookVM : BookVM
     var book: Book
     var numberOfLikes: Int
     @State var tapped = false
-    @State var numLike = 0
     @ObservedObject var detailVM : DetailBookVM
     
     var body: some View {
+        NavigationView{
         VStack{
             ScrollView{
                 Group{
@@ -29,8 +30,26 @@ struct DetailBookView: View {
                         .font(.headline)
                         .padding(.top, 20)
                     
+
                     Text(book.author)
                         .font(.headline)
+                    
+                    if bookVM.favorite(book: book) == false{
+                        Image(systemName: "star")
+                            .font(.system(size: 40))
+                            .foregroundColor(.yellow)
+                            .onTapGesture {
+                                bookVM.addFavorite(book: book)
+                            }
+                    }
+                    else{
+                        Image(systemName: "star.fill")
+                            .font(.system(size: 40))
+                            .foregroundColor(.yellow)
+                            .onTapGesture {
+                                bookVM.addFavorite(book: book)
+                            }
+                    }
                     
                     Text(book.description)
                         .padding(.top, 20)
@@ -54,14 +73,9 @@ struct DetailBookView: View {
                 }
                 .frame(width: 400, height: 100, alignment: .center)
                 
-                //NavigationLink(destination: CommView(book: book, detailVM: detailVM), isActive: $tapped){
-                Text("This book was liked by \(numLike) people")
-                //}
-                //.padding(.top, 20)
-                
                 
                 HStack{
-                    NavigationLink(destination: CommView(book: book, detailVM: detailVM), isActive: $tapped){
+                    NavigationLink(destination: CommView(book: book, detailVM: detailVM).navigationBarBackButtonHidden(true), isActive: $tapped){
                         Button {
                             tapped = true
                         }
@@ -77,7 +91,6 @@ struct DetailBookView: View {
                     }
                     
                     Button {
-                        numLike+=1
                         detailVM.sendLike(name: detailVM.getName(), surname: detailVM.getSurname(), bookName: book.title)
                     }
                 label: {
@@ -93,8 +106,12 @@ struct DetailBookView: View {
             }
             
         }
+        
+        .navigationBarTitle("")
+        .navigationBarHidden(true)
+    }
+        
         .onAppear{
-            self.numLike = numberOfLikes
             detailVM.getDocumentId(name: detailVM.getName(), surname: detailVM.getSurname(), bookName: book.title)
         }
     }

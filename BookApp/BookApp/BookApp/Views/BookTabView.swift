@@ -18,12 +18,12 @@ struct BookTabView: View {
                     Image(systemName: "book")
                     Text("Books")
                 }
-            FavoritesView()
+            FavoritesView(bookVM: bookVM, detailVM: detailVM)
                 .tabItem{
                     Image(systemName: "heart")
                     Text("Favorites")
                 }
-            RecommendedView(recVM: recVM, bookVM: bookVM)
+            RecommendedView(recVM: recVM, bookVM: bookVM, detailVM: detailVM)
                 .tabItem{
                     Image(systemName: "pencil")
                     Text("Recommended")

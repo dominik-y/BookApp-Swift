@@ -18,6 +18,7 @@ class BookVM : ObservableObject{
     @Published var allLikes = [Like]()
     @Published var searchedBook = ""
     @Published var searchedAllBooks = [Book]()
+    @Published var favoriteBooks = [Book]()
     
     var cancellable: AnyCancellable? = nil
     
@@ -120,6 +121,23 @@ class BookVM : ObservableObject{
             }
         }
         return likeNum
+    }
+    
+    
+    func addFavorite(book: Book){
+        if let index = favoriteBooks.firstIndex(of: book){
+            favoriteBooks.remove(at: index)
+        }
+        else{
+            favoriteBooks.append(book)
+        }
+    }
+    
+    func favorite(book: Book) -> Bool{
+        if favoriteBooks.contains(book){
+            return true
+        }
+        return false
     }
 }
 

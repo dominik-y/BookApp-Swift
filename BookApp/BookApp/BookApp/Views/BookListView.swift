@@ -14,6 +14,7 @@ struct BookListView: View {
     
     var body: some View {
         VStack{
+            
             TextField("Search", text: $bookVM.searchedBook)
                 .frame(width: 250, height: 30, alignment: .center)
                 .overlay(
@@ -25,17 +26,18 @@ struct BookListView: View {
             
             ScrollView{
                 ForEach(bookVM.searchedAllBooks, id: \.self){ book in
-                    NavigationLink(destination: DetailBookView(book: book, numberOfLikes: bookVM.getBookLikesNum(bookName: book.title), detailVM: detailVM)){
+                    NavigationLink(destination: DetailBookView(bookVM: bookVM, book: book, numberOfLikes: bookVM.getBookLikesNum(bookName: book.title), detailVM: detailVM)){
                         HStack{
                             WebImage(url: URL(string: book.url))
                                 .resizable()
                                 .scaledToFill()
-                                .frame(width: 100, height: 150)
+                                .frame(width: 120, height: 150)
                                 .cornerRadius(5)
                             VStack {
                                 Text(book.title)
                             }
                             HStack {
+                                Spacer()
                                 Image(systemName: "message")
                                 Text(String(bookVM.getBookCommentNum(bookName: book.title)))
                                                                 

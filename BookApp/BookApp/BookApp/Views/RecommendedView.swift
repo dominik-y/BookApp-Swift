@@ -13,6 +13,7 @@ struct RecommendedView: View {
     
     @ObservedObject var recVM : RecommendedVM
     @ObservedObject var bookVM : BookVM
+    @ObservedObject var detailVM : DetailBookVM
     
     var body: some View {
         VStack{
@@ -22,28 +23,37 @@ struct RecommendedView: View {
             
             ScrollView{
                 ForEach(recVM.allRecommendedBooks, id: \.self){ book in
-                    HStack{
-                        WebImage(url: URL(string: book.url))
-                            .resizable()
-                            .scaledToFill()
-                            .frame(width: 100, height: 150)
-                            .cornerRadius(5)
-                        VStack {
-                            Text(book.title)
+                    NavigationLink(destination: DetailBookView(bookVM: bookVM, book: book, numberOfLikes: bookVM.getBookLikesNum(bookName: book.title), detailVM: detailVM)){
+                        HStack{
+                            WebImage(url: URL(string: book.url))
+                                .resizable()
+                                .scaledToFill()
+                                .frame(width: 120, height: 150)
+                                .cornerRadius(5)
+                            VStack {
+                                Text(book.title)
+                            }
+                            HStack {
+                                Spacer()
+                                Image(systemName: "message")
+                                Text(String(bookVM.getBookCommentNum(bookName: book.title)))
+                                                                
+                                Image(systemName: "hand.thumbsup")
+                                Text(String(bookVM.getBookLikesNum(bookName: book.title)))
+                            }
                         }
-                        HStack {
-                            Image(systemName: "message")
-                            Text(String(bookVM.getBookCommentNum(bookName: book.title)))
-                            
-                            Image(systemName: "hand.thumbsup")
-                            Text(String(bookVM.getBookLikesNum(bookName: book.title)))
-                        }
+                        /*.onLongPressGesture{
+                            bookVM.addFavorite(book: book)
+                            print("Fav")
+                        }*/
+                        .padding(15)
+                        Spacer()
                     }
-                    .padding(15)
-                    Spacer()
                 }
             }.clipped()
         }
+        .navigationBarTitle("")
+        .navigationBarHidden(true)
         .onAppear{
             for user in recVM.allUsers{
                 if user.id == Auth.auth().currentUser?.uid{
@@ -56,6 +66,6 @@ struct RecommendedView: View {
 
 struct RecommendedView_Previews: PreviewProvider {
     static var previews: some View {
-        RecommendedView(recVM: RecommendedVM(), bookVM: BookVM())
+        RecommendedView(recVM: RecommendedVM(), bookVM: BookVM(), detailVM: DetailBookVM())
     }
 }

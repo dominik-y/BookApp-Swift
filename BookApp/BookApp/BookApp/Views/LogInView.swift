@@ -11,8 +11,7 @@ struct LogInView: View {
     
     @State var email = ""
     @State var password = ""
-    //    @State var isLogged = false
-    //    @State var shouldRegistrate = false
+    @State var shouldRegistrate = false
     
     @ObservedObject var loginVM = LogInVM()
     @ObservedObject var bookVM = BookVM()
@@ -20,51 +19,41 @@ struct LogInView: View {
     @ObservedObject var detailVM = DetailBookVM()
     
     var body: some View {
-        NavigationView{
-            VStack{
-                TextField("Email", text: $email)
-                    .frame(width: 330, height: 40, alignment: .center)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 7)
-                            .stroke(Color.purple, lineWidth: 4)
-                    ).padding()
-                    .autocapitalization(.none)
-                    .multilineTextAlignment(.center)
-                
-                SecureField("Password", text: $password)
-                    .frame(width: 330, height: 40, alignment: .center)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 7)
-                            .stroke(Color.purple, lineWidth: 4)
-                    )
-                    .multilineTextAlignment(.center)
-                
-                HStack{
-                    NavigationLink(destination: BookTabView(bookVM: bookVM, recVM: recVM, detailVM: detailVM), isActive: $loginVM.isLogged) {
+        if loginVM.isLogged == false {
+            NavigationView{
+                VStack{
+                    LottieView(name: "book", loopMode: .loop)
+                                .frame(width: 250, height: 250)
+                    
+                    TextField("Email", text: $email)
+                        .frame(width: 330, height: 40, alignment: .center)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 7)
+                                .stroke(Color.purple, lineWidth: 4)
+                        ).padding()
+                        .autocapitalization(.none)
+                        .multilineTextAlignment(.center)
+                    
+                    SecureField("Password", text: $password)
+                        .frame(width: 330, height: 40, alignment: .center)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 7)
+                                .stroke(Color.purple, lineWidth: 4)
+                        )
+                        .multilineTextAlignment(.center)
+                    
+                    HStack{
+                        
                         Button {
                             loginVM.logIn(email: email, password: password)
                         } label: {
                             Text("Login")
                         }
                         .alert("Not a proper Email", isPresented: $loginVM.shouldAlertEmail) {
-                                    Button("OK", role: .cancel) { }
-                                }
+                            Button("OK", role: .cancel) { }
+                        }
                         .alert("Wrong credentials", isPresented: $loginVM.shouldAlertCredentials) {
-                                    Button("OK", role: .cancel) { }
-                                }
-                        .frame(width: 110, height: 30, alignment: .center)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 15)
-                                .stroke(Color.purple, lineWidth: 4)
-                        )
-                        .foregroundColor(.purple)
-                    }
-                    
-                    NavigationLink(destination: RegistrationView(loginVM: loginVM), isActive: $loginVM.shouldRegistrate) {
-                        Button {
-                            loginVM.shouldRegistrate = true
-                        } label: {
-                            Text("Registration")
+                            Button("OK", role: .cancel) { }
                         }
                         .frame(width: 110, height: 30, alignment: .center)
                         .overlay(
@@ -72,10 +61,29 @@ struct LogInView: View {
                                 .stroke(Color.purple, lineWidth: 4)
                         )
                         .foregroundColor(.purple)
+                        
+                        NavigationLink(destination: RegistrationView(loginVM: loginVM), isActive: $loginVM.shouldRegistrate) {
+                            Button {
+                                loginVM.shouldRegistrate = true
+                                print("reg")
+                            } label: {
+                                Text("Registration")
+                            }
+                            .frame(width: 110, height: 30, alignment: .center)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 15)
+                                    .stroke(Color.purple, lineWidth: 4)
+                            )
+                            .foregroundColor(.purple)
+                        }
                     }
-                    
+                    .padding(.top, 20)
                 }
-                .padding(.top, 20)
+            }
+        }
+        else{
+            NavigationView{
+                BookTabView(bookVM: bookVM, recVM: recVM, detailVM: detailVM)
             }
         }
     }

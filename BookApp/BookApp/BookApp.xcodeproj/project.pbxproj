@@ -44,6 +44,7 @@
 		B42225B72760D00B001F229E /* FirebaseStorageSwift-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = B42225B62760D00B001F229E /* FirebaseStorageSwift-Beta */; };
 		B44398AD2760D03D0012B61F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B44398AC2760D03D0012B61F /* GoogleService-Info.plist */; };
 		B44398AF2760DA580012B61F /* LogInVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = B44398AE2760DA580012B61F /* LogInVM.swift */; };
+		B4525C4E2767C67800155D9B /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = B4525C4D2767C67800155D9B /* Lottie */; };
 		B478B14D2763BAEC00699E81 /* RecommendedVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = B478B14C2763BAEC00699E81 /* RecommendedVM.swift */; };
 		B478B14F2763BB4A00699E81 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = B478B14E2763BB4900699E81 /* User.swift */; };
 		B478B1512763C98300699E81 /* DetailBookView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B478B1502763C98300699E81 /* DetailBookView.swift */; };
@@ -55,6 +56,8 @@
 		B4D68BE12760C4D900738A98 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B4D68BE02760C4D900738A98 /* Preview Assets.xcassets */; };
 		B4D68BEB2760C53400738A98 /* LogInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4D68BEA2760C53400738A98 /* LogInView.swift */; };
 		B4D68BEF2760C95C00738A98 /* RegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4D68BEE2760C95C00738A98 /* RegistrationView.swift */; };
+		B4E614992767C76E009EBDA2 /* book.json in Resources */ = {isa = PBXBuildFile; fileRef = B4E614982767C76E009EBDA2 /* book.json */; };
+		B4E6149B2767C790009EBDA2 /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4E6149A2767C790009EBDA2 /* LottieView.swift */; };
 		B4EF90E927665FB8005BF5C4 /* LikeListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4EF90E827665FB8005BF5C4 /* LikeListView.swift */; };
 		B4FECB162763E7730079F373 /* CommView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4FECB152763E7730079F373 /* CommView.swift */; };
 /* End PBXBuildFile section */
@@ -82,6 +85,8 @@
 		B4D68BE02760C4D900738A98 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		B4D68BEA2760C53400738A98 /* LogInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInView.swift; sourceTree = "<group>"; };
 		B4D68BEE2760C95C00738A98 /* RegistrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationView.swift; sourceTree = "<group>"; };
+		B4E614982767C76E009EBDA2 /* book.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = book.json; sourceTree = "<group>"; };
+		B4E6149A2767C790009EBDA2 /* LottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieView.swift; sourceTree = "<group>"; };
 		B4EF90E827665FB8005BF5C4 /* LikeListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeListView.swift; sourceTree = "<group>"; };
 		B4FECB152763E7730079F373 /* CommView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -106,6 +111,7 @@
 				B422259B2760D00A001F229E /* FirebaseFirestore in Frameworks */,
 				B42225AD2760D00A001F229E /* FirebaseMessaging in Frameworks */,
 				B42225A92760D00A001F229E /* FirebaseInstallations in Frameworks */,
+				B4525C4E2767C67800155D9B /* Lottie in Frameworks */,
 				B42225A32760D00A001F229E /* FirebaseFunctionsCombine-Community in Frameworks */,
 				B422258D2760D00A001F229E /* FirebaseAppDistribution-Beta in Frameworks */,
 				B42225892760D00A001F229E /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
@@ -124,6 +130,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B4525C4F2767C68000155D9B /* Lottie */ = {
+			isa = PBXGroup;
+			children = (
+				B4E614982767C76E009EBDA2 /* book.json */,
+				B4E6149A2767C790009EBDA2 /* LottieView.swift */,
+			);
+			path = Lottie;
+			sourceTree = "<group>";
+		};
 		B4D68BCD2760C4D700738A98 = {
 			isa = PBXGroup;
 			children = (
@@ -143,6 +158,7 @@
 		B4D68BD82760C4D700738A98 /* BookApp */ = {
 			isa = PBXGroup;
 			children = (
+				B4525C4F2767C68000155D9B /* Lottie */,
 				B4D68BE92760C4FA00738A98 /* Model */,
 				B4D68BE82760C4F300738A98 /* ViewModels */,
 				B4D68BE72760C4EC00738A98 /* Views */,
@@ -246,6 +262,7 @@
 				B42225B42760D00A001F229E /* FirebaseStorageCombine-Community */,
 				B42225B62760D00B001F229E /* FirebaseStorageSwift-Beta */,
 				B478B1532763CA6100699E81 /* SDWebImageSwiftUI */,
+				B4525C4D2767C67800155D9B /* Lottie */,
 			);
 			productName = BookApp;
 			productReference = B4D68BD62760C4D700738A98 /* BookApp.app */;
@@ -278,6 +295,7 @@
 			packageReferences = (
 				B42225832760D00A001F229E /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				B478B1522763CA6100699E81 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
+				B4525C4C2767C67800155D9B /* XCRemoteSwiftPackageReference "lottie-ios" */,
 			);
 			productRefGroup = B4D68BD72760C4D700738A98 /* Products */;
 			projectDirPath = "";
@@ -293,6 +311,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B4E614992767C76E009EBDA2 /* book.json in Resources */,
 				B4D68BE12760C4D900738A98 /* Preview Assets.xcassets in Resources */,
 				B4D68BDE2760C4D900738A98 /* Assets.xcassets in Resources */,
 				B44398AD2760D03D0012B61F /* GoogleService-Info.plist in Resources */,
@@ -317,6 +336,7 @@
 				B418F5EE2763D88500D2D4E9 /* DetailBookVM.swift in Sources */,
 				B4EF90E927665FB8005BF5C4 /* LikeListView.swift in Sources */,
 				B4D68BEF2760C95C00738A98 /* RegistrationView.swift in Sources */,
+				B4E6149B2767C790009EBDA2 /* LottieView.swift in Sources */,
 				B4157AB827627AB80076E603 /* Like.swift in Sources */,
 				B4157ABA27627ADC0076E603 /* BookVM.swift in Sources */,
 				B42225822760CDD8001F229E /* RecommendedView.swift in Sources */,
@@ -538,6 +558,14 @@
 				minimumVersion = 8.0.0;
 			};
 		};
+		B4525C4C2767C67800155D9B /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-ios";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.0;
+			};
+		};
 		B478B1522763CA6100699E81 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SDWebImage/SDWebImageSwiftUI";
@@ -678,6 +706,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = B42225832760D00A001F229E /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = "FirebaseStorageSwift-Beta";
+		};
+		B4525C4D2767C67800155D9B /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B4525C4C2767C67800155D9B /* XCRemoteSwiftPackageReference "lottie-ios" */;
+			productName = Lottie;
 		};
 		B478B1532763CA6100699E81 /* SDWebImageSwiftUI */ = {
 			isa = XCSwiftPackageProductDependency;

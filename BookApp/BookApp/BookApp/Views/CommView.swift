@@ -11,7 +11,7 @@ struct CommView: View {
     
     var book: Book
     @ObservedObject var detailVM: DetailBookVM
-    
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @State var comment = ""
     
     var body: some View {
@@ -25,6 +25,7 @@ struct CommView: View {
         
         Button {
             detailVM.sendComment(comm: comment, name: detailVM.getName(), surname: detailVM.getSurname(), bookName: book.title)
+            presentationMode.wrappedValue.dismiss()
         } label: {
             Text("Comment")
         }

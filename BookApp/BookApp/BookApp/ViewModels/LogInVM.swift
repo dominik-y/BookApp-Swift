@@ -24,9 +24,11 @@ class LogInVM : ObservableObject{
             if let user = authResult?.user {
                 print("---------------------")
                 print(user.uid)
+                self.isLogged = true
                 self.addData(name: name, surname: surname, id: user.uid, genre: genre)
             } else {
                 print(error ?? "")
+                self.isLogged = false
             }
         }
     }
