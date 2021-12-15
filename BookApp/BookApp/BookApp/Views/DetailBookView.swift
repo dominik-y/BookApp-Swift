@@ -17,70 +17,82 @@ struct DetailBookView: View {
     @ObservedObject var detailVM : DetailBookVM
     
     var body: some View {
-        NavigationView{
-        VStack{
-            ScrollView{
-                Group{
-                    WebImage(url: URL(string: book.url))
-                        .resizable()
-                    //.scaledToFill()
-                    //.frame(height: 150, alignment: .center)
-                    
-                    Text(book.title)
-                        .font(.headline)
-                        .padding(.top, 20)
-                    
-
-                    Text(book.author)
-                        .font(.headline)
-                    
-                    if bookVM.favorite(book: book) == false{
-                        Image(systemName: "star")
-                            .font(.system(size: 40))
-                            .foregroundColor(.yellow)
-                            .onTapGesture {
-                                bookVM.addFavorite(book: book)
+        NavigationView {
+            VStack{
+                ScrollView {
+                    Group {
+                        WebImage(url: URL(string: book.url))
+                            .resizable()
+                        HStack{
+                            Text(book.title)
+                                .font(.headline)
+                                .padding(.top, 20)
+                            if bookVM.favorite(book: book) == false {
+                                Image(systemName: "star")
+                                    .font(.system(size: 30))
+                                    .foregroundColor(.yellow)
+                                    .onTapGesture {
+                                        bookVM.addFavorite(book: book)
+                                    }
+                            } else {
+                                Image(systemName: "star.fill")
+                                    .font(.system(size: 30))
+                                    .foregroundColor(.yellow)
+                                    .onTapGesture {
+                                        bookVM.addFavorite(book: book)
+                                    }
                             }
+                        }
+                        Text(book.author)
+                            .font(.headline)
+                        
+                        Text(book.description)
+                            .padding(20)
+                        
+                        Text("Publisher: " + book.publisher)
+                            .padding(.top, 20)
                     }
-                    else{
-                        Image(systemName: "star.fill")
-                            .font(.system(size: 40))
-                            .foregroundColor(.yellow)
-                            .onTapGesture {
-                                bookVM.addFavorite(book: book)
+                    
+                    Text("Comments")
+                        .font(Font.headline.weight(.bold))
+                        .padding(.top, 20)
+                    
+                    ScrollView {
+                        ForEach(detailVM.allComments, id: \.self) { comment in
+                            if comment.bookName == book.title{
+                                HStack {
+                                        Text(comment.name + " " + comment.surname)
+                                        Text(comment.comment)
+                                    }
+                                .padding()
+                                .frame(width: UIScreen.main.bounds.width, alignment: .leading)
                             }
-                    }
-                    
-                    Text(book.description)
-                        .padding(.top, 20)
-                    
-                    
-                    Text("Publisher: " + book.publisher)
-                        .padding(.top, 20)
-                }
-                
-                Text("Comments")
-                    .padding(.top, 20)
-                
-                ScrollView{
-                    ForEach(detailVM.allComments, id: \.self) { comment in
-                        if comment.bookName == book.title{
-                            Text(comment.name + " " + comment.surname)
-                            Text(comment.comment)
-                            Text("---------")
                         }
                     }
-                }
-                .frame(width: 400, height: 100, alignment: .center)
-                
-                
-                HStack{
-                    NavigationLink(destination: CommView(book: book, detailVM: detailVM).navigationBarBackButtonHidden(true), isActive: $tapped){
+                    .background(Color.gray.opacity(0.6))
+                    
+                    
+                    HStack {
+                        NavigationLink(destination: CommView(book: book, detailVM: detailVM).navigationBarBackButtonHidden(true), isActive: $tapped) {
+                            Button {
+                                tapped = true
+                            }
+                        label: {
+                            Text("Comment")
+                        }
+                        .frame(width: 100, height: 30, alignment: .center)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 15)
+                                .stroke(Color.purple, lineWidth: 4)
+                        )
+                        .foregroundColor(.purple)
+                        }
+                        
                         Button {
-                            tapped = true
+                            detailVM.sendLike(name: detailVM.getName(), surname: detailVM.getSurname(), bookName: book.title)
                         }
                     label: {
-                        Text("Comment")
+                        Text("Like")
                     }
                     .frame(width: 100, height: 30, alignment: .center)
                     .overlay(
@@ -89,27 +101,14 @@ struct DetailBookView: View {
                     )
                     .foregroundColor(.purple)
                     }
-                    
-                    Button {
-                        detailVM.sendLike(name: detailVM.getName(), surname: detailVM.getSurname(), bookName: book.title)
-                    }
-                label: {
-                    Text("Like")
+                    .padding(.vertical)
                 }
-                .frame(width: 100, height: 30, alignment: .center)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 15)
-                        .stroke(Color.purple, lineWidth: 4)
-                )
-                .foregroundColor(.purple)
-                }
+                
             }
             
+            .navigationBarTitle("Back")
+            .navigationBarHidden(true)
         }
-        
-        .navigationBarTitle("")
-        .navigationBarHidden(true)
-    }
         
         .onAppear{
             detailVM.getDocumentId(name: detailVM.getName(), surname: detailVM.getSurname(), bookName: book.title)

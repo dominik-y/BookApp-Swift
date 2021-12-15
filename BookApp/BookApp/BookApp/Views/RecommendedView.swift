@@ -16,48 +16,47 @@ struct RecommendedView: View {
     @ObservedObject var detailVM : DetailBookVM
     
     var body: some View {
-        VStack{
+        NavigationView {
             
-            Text(recVM.getGenre())
-                .font(.headline)
-            
-            ScrollView{
-                ForEach(recVM.allRecommendedBooks, id: \.self){ book in
-                    NavigationLink(destination: DetailBookView(bookVM: bookVM, book: book, numberOfLikes: bookVM.getBookLikesNum(bookName: book.title), detailVM: detailVM)){
-                        HStack{
-                            WebImage(url: URL(string: book.url))
-                                .resizable()
-                                .scaledToFill()
-                                .frame(width: 120, height: 150)
-                                .cornerRadius(5)
-                            VStack {
-                                Text(book.title)
-                            }
+            VStack{
+                
+                Text(recVM.getGenre())
+                    .font(.headline)
+                
+                ScrollView {
+                    ForEach(recVM.allRecommendedBooks, id: \.self){ book in
+                        NavigationLink(destination: DetailBookView(bookVM: bookVM, book: book, numberOfLikes: bookVM.getBookLikesNum(bookName: book.title), detailVM: detailVM)){
                             HStack {
-                                Spacer()
-                                Image(systemName: "message")
-                                Text(String(bookVM.getBookCommentNum(bookName: book.title)))
-                                                                
-                                Image(systemName: "hand.thumbsup")
-                                Text(String(bookVM.getBookLikesNum(bookName: book.title)))
+                                WebImage(url: URL(string: book.url))
+                                    .resizable()
+                                    .scaledToFill()
+                                    .frame(width: 120, height: 150)
+                                    .cornerRadius(5)
+                                VStack {
+                                    Text(book.title).foregroundColor(.black)
+                                }
+                                HStack {
+                                    Spacer()
+                                    Image(systemName: "message")
+                                    Text(String(bookVM.getBookCommentNum(bookName: book.title)))
+                                    
+                                    Image(systemName: "hand.thumbsup")
+                                    Text(String(bookVM.getBookLikesNum(bookName: book.title)))
+                                }
                             }
+                            .padding(15)
+                            Spacer()
                         }
-                        /*.onLongPressGesture{
-                            bookVM.addFavorite(book: book)
-                            print("Fav")
-                        }*/
-                        .padding(15)
-                        Spacer()
                     }
-                }
-            }.clipped()
-        }
-        .navigationBarTitle("")
-        .navigationBarHidden(true)
-        .onAppear{
-            for user in recVM.allUsers{
-                if user.id == Auth.auth().currentUser?.uid{
-                    recVM.getAllBooks(genre: user.genre)
+                }.clipped()
+            }
+            .navigationBarTitle("")
+            .navigationBarHidden(true)
+            .onAppear{
+                for user in recVM.allUsers {
+                    if user.id == Auth.auth().currentUser?.uid {
+                        recVM.getAllBooks(genre: user.genre)
+                    }
                 }
             }
         }

@@ -15,12 +15,14 @@ struct CommView: View {
     @State var comment = ""
     
     var body: some View {
-        TextField("Name", text: $comment)
-            .frame(width: 250, height: 30, alignment: .center)
+        
+        TextField("Leave a comment", text: $comment)
+            .frame(width: 250, height: 50, alignment: .center)
             .overlay(
                 RoundedRectangle(cornerRadius: 15)
                     .stroke(Color.purple, lineWidth: 4)
             )
+            .padding(.bottom, 20)
             .multilineTextAlignment(.center)
         
         Button {

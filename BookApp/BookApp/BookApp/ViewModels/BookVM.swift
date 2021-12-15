@@ -28,30 +28,30 @@ class BookVM : ObservableObject{
         self.getAllBooks()
         
         cancellable = $searchedBook
-                    .removeDuplicates()
-                    .debounce(for: 0.5, scheduler: RunLoop.main)
-                    .sink(receiveValue: {str in
-                        if str == "" {
-                            self.searchedAllBooks = self.allBooks
-                        }else{
-                            self.searchedAllBooks = []
-                            self.search(text: str)
-                        }
-                    })
+            .removeDuplicates()
+            .debounce(for: 0.5, scheduler: RunLoop.main)
+            .sink(receiveValue: {str in
+                if str == "" {
+                    self.searchedAllBooks = self.allBooks
+                } else {
+                    self.searchedAllBooks = []
+                    self.search(text: str)
+                }
+            })
     }
     
-    func search(text: String){
-        for book in allBooks{
-            if book.title.contains(text.uppercased()){
+    func search(text: String) {
+        for book in allBooks {
+            if book.title.contains(text.uppercased()) {
                 searchedAllBooks.append(book)
             }
         }
     }
     
     
-    func getAllBooks(){
-        Firestore.firestore().collection("Books").addSnapshotListener{ (querySnapshot, err) in
-            guard let documents = querySnapshot?.documents else{
+    func getAllBooks() {
+        Firestore.firestore().collection("Books").addSnapshotListener { (querySnapshot, err) in
+            guard let documents = querySnapshot?.documents else {
                 return
             }
             self.allBooks = documents.map{ (queryDocumentSnapshot) -> Book in
@@ -70,9 +70,9 @@ class BookVM : ObservableObject{
         }
     }
     
-    func getAllComments(){
+    func getAllComments() {
         Firestore.firestore().collection("Comments").addSnapshotListener{ (querySnapshot, err) in
-            guard let documents = querySnapshot?.documents else{
+            guard let documents = querySnapshot?.documents else {
                 return
             }
             self.allComments = documents.map{ (queryDocumentSnapshot) -> Comment in
@@ -89,17 +89,17 @@ class BookVM : ObservableObject{
     
     func getBookCommentNum(bookName: String) -> Int{
         var commentNum = 0
-        for comment in allComments{
-            if bookName == comment.bookName{
+        for comment in allComments {
+            if bookName == comment.bookName {
                 commentNum += 1
             }
         }
         return commentNum
     }
     
-    func getAllLikes(){
+    func getAllLikes() {
         Firestore.firestore().collection("Likes").addSnapshotListener{ (querySnapshot, err) in
-            guard let documents = querySnapshot?.documents else{
+            guard let documents = querySnapshot?.documents else {
                 return
             }
             self.allLikes = documents.map{ (queryDocumentSnapshot) -> Like in
@@ -113,9 +113,9 @@ class BookVM : ObservableObject{
         }
     }
     
-    func getBookLikesNum(bookName: String) -> Int{
+    func getBookLikesNum(bookName: String) -> Int {
         var likeNum = 0
-        for like in allLikes{
+        for like in allLikes {
             if bookName == like.bookName{
                 likeNum += 1
             }
@@ -124,17 +124,17 @@ class BookVM : ObservableObject{
     }
     
     
-    func addFavorite(book: Book){
-        if let index = favoriteBooks.firstIndex(of: book){
+    func addFavorite(book: Book) {
+        if let index = favoriteBooks.firstIndex(of: book) {
             favoriteBooks.remove(at: index)
         }
-        else{
+        else {
             favoriteBooks.append(book)
         }
     }
     
-    func favorite(book: Book) -> Bool{
-        if favoriteBooks.contains(book){
+    func favorite(book: Book) -> Bool {
+        if favoriteBooks.contains(book) {
             return true
         }
         return false

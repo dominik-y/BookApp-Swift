@@ -15,13 +15,15 @@ struct RegistrationView: View {
     @State var genre = "Espionage"
     
     let genres = ["Humor", "Health", "Fiction", "Espionage"]
-    
     var loginVM : LogInVM
-    
+
     var body: some View {
-        VStack{
+        VStack {
+            LottieView(name: "book", loopMode: .loop)
+                .frame(width: 300, height: 250)
+            
             TextField("Email", text: $email)
-                .frame(width: 250, height: 30, alignment: .center)
+                .frame(width: 330, height: 50, alignment: .center)
                 .overlay(
                     RoundedRectangle(cornerRadius: 15)
                         .stroke(Color.purple, lineWidth: 4)
@@ -30,7 +32,7 @@ struct RegistrationView: View {
                 .multilineTextAlignment(.center)
             
             SecureField("Password", text: $password)
-                .frame(width: 250, height: 30, alignment: .center)
+                .frame(width: 330, height: 50, alignment: .center)
                 .overlay(
                     RoundedRectangle(cornerRadius: 15)
                         .stroke(Color.purple, lineWidth: 4)
@@ -39,7 +41,7 @@ struct RegistrationView: View {
                 .multilineTextAlignment(.center)
             
             TextField("Name", text: $name)
-                .frame(width: 250, height: 30, alignment: .center)
+                .frame(width: 330, height: 50, alignment: .center)
                 .overlay(
                     RoundedRectangle(cornerRadius: 15)
                         .stroke(Color.purple, lineWidth: 4)
@@ -48,7 +50,7 @@ struct RegistrationView: View {
                 .multilineTextAlignment(.center)
             
             TextField("Surname", text: $surname)
-                .frame(width: 250, height: 30, alignment: .center)
+                .frame(width: 330, height: 50, alignment: .center)
                 .overlay(
                     RoundedRectangle(cornerRadius: 15)
                         .stroke(Color.purple, lineWidth: 4)
@@ -61,24 +63,23 @@ struct RegistrationView: View {
                     Text($0)
                 }
             }
-            .frame(width: 250, height: 30, alignment: .center)
+            .frame(width: 330, height: 50, alignment: .center)
             .overlay(
                 RoundedRectangle(cornerRadius: 15)
                     .stroke(Color.purple, lineWidth: 4)
             ).padding(5)
-            .multilineTextAlignment(.center)
+                .multilineTextAlignment(.center)
             
-            HStack{
-                Button("Register") {
+            HStack {
+                Button("Sign Up ") {
                     loginVM.SignUp(email: email, password: password, name: name, surname: surname, genre: genre)
                 }.padding()
-                .frame(width: 100, height: 30, alignment: .center)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 15)
-                        .stroke(Color.purple, lineWidth: 4)
-                )
-                .foregroundColor(.purple)
-                
+                    .frame(width: 330, height: 50, alignment: .center)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 15)
+                            .stroke(Color.purple, lineWidth: 4)
+                    )
+                    .foregroundColor(.black)
             }
             .padding(.top, 20)
         }

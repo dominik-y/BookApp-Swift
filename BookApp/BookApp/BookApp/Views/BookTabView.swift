@@ -11,22 +11,28 @@ struct BookTabView: View {
     var bookVM: BookVM
     var recVM: RecommendedVM
     var detailVM : DetailBookVM
+    var loginVM: LogInVM
     var body: some View {
-        TabView{
+        TabView {
             BookListView(bookVM: bookVM, detailVM: detailVM)
-                .tabItem{
+                .tabItem {
                     Image(systemName: "book")
                     Text("Books")
                 }
             FavoritesView(bookVM: bookVM, detailVM: detailVM)
-                .tabItem{
+                .tabItem {
                     Image(systemName: "heart")
                     Text("Favorites")
                 }
             RecommendedView(recVM: recVM, bookVM: bookVM, detailVM: detailVM)
-                .tabItem{
+                .tabItem {
                     Image(systemName: "pencil")
                     Text("Recommended")
+                }
+            SettingsView(loginVM: loginVM)
+                .tabItem {
+                    Image(systemName: "gear")
+                    Text("Settings")
                 }
         }
         .navigationBarBackButtonHidden(true)
@@ -35,6 +41,6 @@ struct BookTabView: View {
 
 struct BookTabView_Previews: PreviewProvider {
     static var previews: some View {
-        BookTabView(bookVM: BookVM(), recVM: RecommendedVM(), detailVM: DetailBookVM())
+        BookTabView(bookVM: BookVM(), recVM: RecommendedVM(), detailVM: DetailBookVM(), loginVM: LogInVM())
     }
 }

@@ -20,10 +20,10 @@ struct LogInView: View {
     
     var body: some View {
         if loginVM.isLogged == false {
-            NavigationView{
-                VStack{
+            NavigationView {
+                VStack {
                     LottieView(name: "book", loopMode: .loop)
-                                .frame(width: 250, height: 250)
+                        .frame(width: 300, height: 250)
                     
                     TextField("Email", text: $email)
                         .frame(width: 330, height: 40, alignment: .center)
@@ -42,10 +42,12 @@ struct LogInView: View {
                         )
                         .multilineTextAlignment(.center)
                     
-                    HStack{
+                    HStack {
                         
                         Button {
                             loginVM.logIn(email: email, password: password)
+                            email = ""
+                            password = ""
                         } label: {
                             Text("Login")
                         }
@@ -76,14 +78,12 @@ struct LogInView: View {
                             )
                             .foregroundColor(.purple)
                         }
-                    }
-                    .padding(.top, 20)
-                }
+                    }.padding(.top, 20)
+                }.padding(.bottom, 100)
             }
-        }
-        else{
-            NavigationView{
-                BookTabView(bookVM: bookVM, recVM: recVM, detailVM: detailVM)
+        } else {
+            NavigationView {
+                BookTabView(bookVM: bookVM, recVM: recVM, detailVM: detailVM, loginVM: loginVM)
             }
         }
     }

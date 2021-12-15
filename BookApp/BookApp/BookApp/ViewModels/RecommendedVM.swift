@@ -10,19 +10,19 @@ import Firebase
 import FirebaseAuth
 import FirebaseFirestore
 
-class RecommendedVM : ObservableObject{
+class RecommendedVM : ObservableObject {
     
     @Published var allRecommendedBooks = [Book]()
     @Published var allUsers = [User]()
     @Published var allComments = [Comment]()
     @Published var allLikes = [Like]()
     
-    init(){
+    init() {
         getUsers()
     }
     
-    func getGenre() -> String{
-        for user in allUsers{
+    func getGenre() -> String {
+        for user in allUsers {
             if user.id == Auth.auth().currentUser?.uid{
                 return user.genre
             }
@@ -30,9 +30,9 @@ class RecommendedVM : ObservableObject{
         return ""
     }
     
-    func getUsers(){
+    func getUsers() {
         Firestore.firestore().collection("User").addSnapshotListener{ (querySnapshot, err) in
-            guard let documents = querySnapshot?.documents else{
+            guard let documents = querySnapshot?.documents else {
                 return
             }
             self.allUsers = documents.map{ (queryDocumentSnapshot) -> User in
@@ -44,16 +44,15 @@ class RecommendedVM : ObservableObject{
                 let user = User(name: name, surname: surname, genre: genre, id: id)
                 return user
             }
-            print("AAAAAAA")
             print(self.allUsers)
         }
     }
     
     
     
-    func getAllBooks(genre: String){
+    func getAllBooks(genre: String) {
         Firestore.firestore().collection(genre).addSnapshotListener{ (querySnapshot, err) in
-            guard let documents = querySnapshot?.documents else{
+            guard let documents = querySnapshot?.documents else {
                 return
             }
             self.allRecommendedBooks = documents.map{ (queryDocumentSnapshot) -> Book in
@@ -72,9 +71,9 @@ class RecommendedVM : ObservableObject{
         }
     }
     
-    func getAllComments(){
+    func getAllComments() {
         Firestore.firestore().collection("Comments").addSnapshotListener{ (querySnapshot, err) in
-            guard let documents = querySnapshot?.documents else{
+            guard let documents = querySnapshot?.documents else {
                 return
             }
             self.allComments = documents.map{ (queryDocumentSnapshot) -> Comment in
@@ -89,19 +88,19 @@ class RecommendedVM : ObservableObject{
         }
     }
     
-    func getBookCommentNum(bookName: String) -> Int{
+    func getBookCommentNum(bookName: String) -> Int {
         var commentNum = 0
-        for comment in allComments{
-            if bookName == comment.bookName{
+        for comment in allComments {
+            if bookName == comment.bookName {
                 commentNum += 1
             }
         }
         return commentNum
     }
     
-    func getAllLikes(){
+    func getAllLikes() {
         Firestore.firestore().collection("Likes").addSnapshotListener{ (querySnapshot, err) in
-            guard let documents = querySnapshot?.documents else{
+            guard let documents = querySnapshot?.documents else {
                 return
             }
             self.allLikes = documents.map{ (queryDocumentSnapshot) -> Like in
@@ -115,10 +114,10 @@ class RecommendedVM : ObservableObject{
         }
     }
     
-    func getBookLikesNum(bookName: String) -> Int{
+    func getBookLikesNum(bookName: String) -> Int {
         var likeNum = 0
-        for like in allLikes{
-            if bookName == like.bookName{
+        for like in allLikes {
+            if bookName == like.bookName {
                 likeNum += 1
             }
         }
